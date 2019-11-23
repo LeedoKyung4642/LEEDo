@@ -440,7 +440,7 @@ if __name__ == '__main__':
                 Angle = 100 + int(GetAngleTwoPoints(point2, point1))
 
                 #----------DO---------------------------------
-                # print(angle)
+                print(Angle)
                 # ----------------------------------------
 
                 X_Size = int((255.0 / W_View_size) * w4)
