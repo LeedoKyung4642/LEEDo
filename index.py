@@ -385,7 +385,9 @@ if __name__ == '__main__':
 
     # -------- Main Loop Start --------
     while True:
-
+        key=cv2.watikey(1)  #key==ord("a")
+        if key==27:
+            break
         # grab the current frame
         (grabbed, frame) = camera.read()
 
@@ -437,7 +439,7 @@ if __name__ == '__main__':
                 Angle = 100 + int(GetAngleTwoPoints(point2, point1))
                 #----------DO---------------------------------
                 print(Angle)
-                
+
 
                 X_Size = int((255.0 / W_View_size) * w4)
                 Y_Size = int((255.0 / H_View_size) * h4)
@@ -531,7 +533,7 @@ if __name__ == '__main__':
 
             else:
                 View_select = 0
-
+    cv2.destroyAllWindow()
     # cleanup the camera and close any open windows
     if serial_use != 0:
        serial_port.close()
