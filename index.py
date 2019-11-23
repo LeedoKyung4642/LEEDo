@@ -32,14 +32,14 @@ hsv_Upper1 = 0
 # -----------  0:노란색, 1:빨강색, 3:파란색
 color_num = [0, 1, 2, 3, 4]
 
-h_max = [152, 65, 196, 111, 110]
-h_min = [130, 0, 158, 59, 74]
+h_max = [107, 65, 196, 111, 110]
+h_min = [77, 0, 158, 59, 74]
 
 s_max = [164, 200, 223, 110, 255]
 s_min = [139, 140, 150, 51, 133]
 
-v_max = [46, 151, 239, 156, 255]
-v_min = [27, 95, 104, 61, 104]
+v_max = [82, 151, 239, 156, 255]
+v_min = [63, 95, 104, 61, 104]
 
 min_area = [50, 50, 50, 10, 10]
 
@@ -452,12 +452,13 @@ if __name__ == '__main__':
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
                 if mask.any():
-                    if Angle < 70:
-                        TX_data(serial_port, 1)
-                    elif Angle > 110:
-                        TX_data(serial_port, 3)
-                    else:
-                        TX_data(serial_port, 8)
+                    TX_data(serial_port, 1)
+                    #if Angle < 70:
+                    #    TX_data(serial_port, 1)
+                    #elif Angle > 110:
+                    #    TX_data(serial_port, 3)
+                    #else:
+                    #    TX_data(serial_port, 8)
                 else:
                     TX_data(serial_port,260)
                     break
