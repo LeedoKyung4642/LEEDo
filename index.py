@@ -385,9 +385,9 @@ if __name__ == '__main__':
 
     # -------- Main Loop Start --------
     while True:
-        key=cv2.waitkey(1)  #key==ord("a")
-        if key==27:
-            break
+        #key=cv2.waitkey(1)  #key==ord("a")
+        #if key==27:
+        #    break
         # grab the current frame
         (grabbed, frame) = camera.read()
 
@@ -533,7 +533,7 @@ if __name__ == '__main__':
 
             else:
                 View_select = 0
-    cv2.destroyAllWindow()
+    #cv2.destroyAllWindow()
     # cleanup the camera and close any open windows
     if serial_use != 0:
        serial_port.close()
