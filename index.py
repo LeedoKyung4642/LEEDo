@@ -377,9 +377,9 @@ if __name__ == '__main__':
        t.start()
     #
     # First -> Start Code Send
-    TX_data(serial_port, 250)
-    TX_data(serial_port, 250)
-    TX_data(serial_port, 250)
+    TX_data(serial_port, 1)
+    TX_data(serial_port, 1)
+    TX_data(serial_port, 1)
 
     old_time = clock()
 
@@ -544,7 +544,7 @@ if __name__ == '__main__':
 
             else:
                 View_select = 0
-    cv2.destroyAllWindow()
+    cv2.destroyAllWindows()
     # cleanup the camera and close any open windows
     if serial_use != 0:
        serial_port.close()
