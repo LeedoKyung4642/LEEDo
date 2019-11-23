@@ -355,9 +355,9 @@ if __name__ == '__main__':
     time.sleep(0.5)
     # ---------------------------
 
-    #if serial_use != 0:
-      # serial_port = serial.Serial('/dev/ttyAMA0', BPS, timeout=0.001)
-      # serial_port.flush() # serial cls
+    if serial_use != 0:
+       serial_port = serial.Serial('/dev/ttyAMA0', BPS, timeout=0.001)
+       serial_port.flush() # serial cls
 
     # ---------------------------
     (grabbed, frame) = camera.read()
