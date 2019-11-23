@@ -385,10 +385,10 @@ if __name__ == '__main__':
 
     # -------- Main Loop Start --------
     while True:
-        #key=cv2.waitkey(1)  #key==ord("a")
-        #if key==27:
-        #    break
-        # grab the current frame
+        key=cv2.waitkey(1)  #key==ord("a")
+        if key==27:
+            break
+        grab the current frame
         (grabbed, frame) = camera.read()
 
         if args.get("Video") and not grabbed:
@@ -437,9 +437,12 @@ if __name__ == '__main__':
                 point2 = (0, lefty)
 
                 Angle = 100 + int(GetAngleTwoPoints(point2, point1))
+
                 #----------DO---------------------------------
                 print(Angle)
 
+                # print(angle)
+                # ----------------------------------------
 
                 X_Size = int((255.0 / W_View_size) * w4)
                 Y_Size = int((255.0 / H_View_size) * h4)
