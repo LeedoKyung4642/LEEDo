@@ -310,7 +310,7 @@ if __name__ == '__main__':
     H_View_size = int(W_View_size / 1.333)
 
     BPS = 4800  # 4800,9600,14400, 19200,28800, 57600, 115200
-    serial_use = 1 ###### <+=========== ************* ADFADSFASFSD
+    serial_use = 0 ###### <+=========== ************* ADFADSFASFSD
     now_color = 0
     View_select = 1
     # -------------------------------------
@@ -356,7 +356,7 @@ if __name__ == '__main__':
     # ---------------------------
 
     if serial_use != 0:
-       # serial_port = serial.Serial('/dev/ttyAMA0', BPS, timeout=0.001)
+        serial_port = serial.Serial('/dev/ttyAMA0', BPS, timeout=0.001)
         serial_port.flush() # serial cls
 
     # ---------------------------
