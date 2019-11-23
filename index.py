@@ -452,6 +452,7 @@ if __name__ == '__main__':
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
                 if mask.any():
+                    print("ye")
                     TX_data(serial_port, 1)
                     #if Angle < 70:
                     #    TX_data(serial_port, 1)
