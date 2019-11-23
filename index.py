@@ -456,7 +456,7 @@ if __name__ == '__main__':
                     else:
                         TX_data(serial_port, 8)
                 else:
-                    TX_data(serial_port,260)
+                    TX_data(serial_port,6)
                     break
                 
         else:
