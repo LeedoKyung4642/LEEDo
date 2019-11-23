@@ -388,7 +388,8 @@ if __name__ == '__main__':
         key=cv2.waitkey(1)  #key==ord("a")
         if key==27:
             break
-        grab the current frame
+
+         #grab the current frame
         (grabbed, frame) = camera.read()
 
         if args.get("Video") and not grabbed:
