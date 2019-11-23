@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 import platform
@@ -19,7 +18,7 @@ Y_Size = 0
 Area = 0
 Angle = 0
 # -----------------------------------------------
-Top_name = 'Kongdols Team Setting'
+Top_name = 'Kongdols Team setting'
 hsv_Lower = 0
 hsv_Upper = 0
 
@@ -32,14 +31,14 @@ hsv_Upper1 = 0
 # -----------  0:노란색, 1:빨강색, 3:파란색
 color_num = [0, 1, 2, 3, 4]
 
-h_max = [152, 65, 196, 111, 110]
-h_min = [130, 0, 158, 59, 74]
+h_max = [252, 65, 196, 111, 110]
+h_min = [150, 0, 158, 59, 74]
 
-s_max = [164, 200, 223, 110, 255]
-s_min = [139, 140, 150, 51, 133]
+s_max = [194, 200, 223, 110, 255]
+s_min = [113, 140, 150, 51, 133]
 
-v_max = [46, 151, 239, 156, 255]
-v_min = [27, 95, 104, 61, 104]
+v_max = [255, 151, 239, 156, 255]
+v_min = [89, 95, 104, 61, 104]
 
 min_area = [50, 50, 50, 10, 10]
 
@@ -77,8 +76,8 @@ def create_blank(width, height, rgb_color=(0, 0, 0)):
 # -----------------------------------------------
 def draw_str2(dst, target, s):
     x, y = target
-    cv2.putText(dst, s, (x + 1, y + 1), cv2.FONT_HERSHEY_PLAIN, 0.6, (0, 0, 0), thickness=2, lineType=cv2.LINE_AA)
-    cv2.putText(dst, s, (x, y), cv2.FONT_HERSHEY_PLAIN, 0.6, (255, 255, 255), lineType=cv2.LINE_AA)
+    cv2.putText(dst, s, (x + 1, y + 1), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 0, 0), thickness=2, lineType=cv2.LINE_AA)
+    cv2.putText(dst, s, (x, y), cv2.FONT_HERSHEY_PLAIN, 0.8, (255, 255, 255), lineType=cv2.LINE_AA)
 
 
 # -----------------------------------------------
@@ -258,7 +257,7 @@ def GetLengthTwoPoints(XY_Point1, XY_Point2):
 
 
 # *************************
-def FYtand(dec_val_v, dec_val_h):
+def FYtand(dec_val_v, dec_valw_h):
     return (math.atan2(dec_val_v, dec_val_y) * (180.0 / math.pi))
 
 
@@ -292,7 +291,7 @@ if __name__ == '__main__':
 
     # -------------------------------------
     print("-------------------------------------")
-    print("[2019-11-22] MINI Robot Program.    Kongdols Corp.")
+    print("[2019-11-14] MINI Robot Program.    Kongdols Corp.")
     print("-------------------------------------")
     print("")
     os_version = platform.platform()
@@ -310,7 +309,7 @@ if __name__ == '__main__':
     H_View_size = int(W_View_size / 1.333)
 
     BPS = 4800  # 4800,9600,14400, 19200,28800, 57600, 115200
-    serial_use = 1 ###### <+=========== ************* ADFADSFASFSD
+    serial_use = 1
     now_color = 0
     View_select = 1
     # -------------------------------------
@@ -362,24 +361,24 @@ if __name__ == '__main__':
     # ---------------------------
     (grabbed, frame) = camera.read()
     draw_str2(frame, (5, 15), 'X_Center x Y_Center =  Area')
-    draw_str2(frame, (5, H_View_size - 5), 'View: %.1d x %.1d.  Space: Fast <=> Video and Mask.'
+    draw_str2(frame, (5, H_View_size-5), 'View: %.1d x %.1d.  Space: Fast <=> Video and Mask.'
               % (W_View_size, H_View_size))
     draw_str_height(frame, (5, int(H_View_size / 2)), 'Fast operation...', 3.0)
-    cv2.imshow('Kongdols(frame) - Video', frame)
+    cv2.imshow('Kongdols(f) - Video', frame)
 
-    cv2.setMouseCallback('Kongdols(frame) - Video', mouse_move)
-    #
+    cv2.setMouseCallback('Kongdols(m_m) - Video', mouse_move)
+
     # ---------------------------
 
     if serial_use != 0:
        t = Thread(target=receiving, args=(serial_port,))
        time.sleep(0.1)
        t.start()
-    #
+
     # First -> Start Code Send
-    #TX_data(serial_port, 250)
-    #TX_data(serial_port, 250)
-    #TX_data(serial_port, 250)
+    # TX_data(serial_port, 255)
+    # TX_data(serial_port, 1)
+    # TX_data(serial_port, 1)
 
     old_time = clock()
 
@@ -389,15 +388,14 @@ if __name__ == '__main__':
         # grab the current frame
         (grabbed, frame) = camera.read()
 
-        if args.get("Video") and not grabbed:
+        if args.get("video") and not grabbed:
             break
-
         height = frame.shape[0]
 
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2YUV)
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2YUV)  # HSV => YUV
 
         cut_frame = frame[2*height//3:,:]
-        cut_hsv = hsv[2*height//3:,:]   # HSV => YUV
+        cut_hsv = hsv[2*height//3:,:]
 
         mask = cv2.inRange(cut_hsv, hsv_Lower, hsv_Upper)
         mask = cv2.erode(mask, None, iterations=1)
@@ -445,11 +443,10 @@ if __name__ == '__main__':
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
                 if mask.any():
-                        TX_data(serial_port,1)
+                    TX_data(serial_port,1)
                 else:
-                        TX_data(serial_port,260)
-                        break
-                
+                    TX_data(serial_port,260)
+                    break
         else:
 
             x = 0
@@ -468,16 +465,14 @@ if __name__ == '__main__':
         if Read_RX != 0:
             print("Read_RX = " + str(Read_RX))
 
-        #TX_data(serial_port,255)
-
-        #--------------------------------------    
+        #--------------------------------------
 
         Frame_time = (clock() - old_time) * 1000.
         old_time = clock()
 
         if View_select == 0:  # Fast operation
-            # print(" " + str(W_View_size) + " x " + str(H_View_size) + " =  %.1f ms  Angle: %.2f" % (Frame_time , Angle))
-            # temp = Read_RX
+            #print(" " + str(W_View_size) + " x " + str(H_View_size) + " =  %.1f ms  Angle: %.2f" % (Frame_time , Angle))
+            #temp = Read_RX
             pass
 
         elif View_select == 1:  # Debug
@@ -494,9 +489,6 @@ if __name__ == '__main__':
             set_S = pixel[1]
             set_V = pixel[2]
             pixel2 = frame[my2, mx2]
-
-            #frame[2*height//3:,:] = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
-
             if my2 < (H_View_size / 2):
                 if mx2 < 50:
                     x_p = -30
@@ -516,7 +508,7 @@ if __name__ == '__main__':
                 draw_str2(frame, (mx2 - x_p, my2 - 30), '%.1d' % (pixel[1]))
                 draw_str2(frame, (mx2 - x_p, my2 - 15), '%.1d' % (pixel[2]))
 
-            cv2.imshow('Kongdols(frame) - Video',frame)
+            cv2.imshow('Kongdols(frame) - Video', frame)
             cv2.imshow('Kongdols(mask) - Mask', mask)
 
             # ----------------------------------------------
@@ -535,5 +527,5 @@ if __name__ == '__main__':
     # cleanup the camera and close any open windows
     if serial_use != 0:
        serial_port.close()
-       camera.release()
-       cv2.destroyAllWindows()
+    camera.release()
+    cv2.destroyAllWindows()
