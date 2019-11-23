@@ -350,7 +350,7 @@ if __name__ == '__main__':
 
     # -------- Main Loop Start --------
     while True:
-
+        print("1")
         # grab the current frame
         (grabbed, frame) = camera.read()
 
