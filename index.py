@@ -385,7 +385,7 @@ if __name__ == '__main__':
 
     # -------- Main Loop Start --------
     while True:
-        key=cv2.watikey(1)  #key==ord("a")
+        key=cv2.waitkey(1)  #key==ord("a")
         if key==27:
             break
         # grab the current frame
