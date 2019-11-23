@@ -377,9 +377,9 @@ if __name__ == '__main__':
        t.start()
     #
     # First -> Start Code Send
-    TX_data(serial_port, 1)
-    TX_data(serial_port, 1)
-    TX_data(serial_port, 1)
+    #TX_data(serial_port, 1)
+    #TX_data(serial_port, 1)
+    #TX_data(serial_port, 1)
 
     old_time = clock()
 
@@ -452,14 +452,12 @@ if __name__ == '__main__':
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
                 if mask.any():
-                    print("ye")
-                    TX_data(serial_port, 1)
-                    #if Angle < 70:
-                    #    TX_data(serial_port, 1)
-                    #elif Angle > 110:
-                    #    TX_data(serial_port, 3)
-                    #else:
-                    #    TX_data(serial_port, 8)
+                    if Angle < 70:
+                        TX_data(serial_port, 1)
+                    elif Angle > 110:
+                        TX_data(serial_port, 3)
+                    else:
+                        TX_data(serial_port, 8)
                 else:
                     TX_data(serial_port,260)
                     break
