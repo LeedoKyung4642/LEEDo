@@ -378,8 +378,8 @@ if __name__ == '__main__':
     #
     # First -> Start Code Send
     TX_data(serial_port, 250)
-    #TX_data(serial_port, 250)
-    #TX_data(serial_port, 250)
+    TX_data(serial_port, 250)
+    TX_data(serial_port, 250)
 
     old_time = clock()
 
