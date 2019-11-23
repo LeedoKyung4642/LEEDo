@@ -392,7 +392,7 @@ if __name__ == '__main__':
          #grab the current frame
         (grabbed, frame) = camera.read()
 
-        if args.get("Video") and not grabbed:
+        if not grabbed:
             break
 
         height = frame.shape[0]
@@ -440,9 +440,6 @@ if __name__ == '__main__':
                 Angle = 100 + int(GetAngleTwoPoints(point2, point1))
 
                 #----------DO---------------------------------
-
-
-
                 # print(angle)
                 # ----------------------------------------
 
