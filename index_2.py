@@ -225,7 +225,7 @@ def receiving(ser):
         if receiving_exit == 0:
             break
         time.sleep(threading_Time)
-        while ser.inWaiting() > 0:
+        while False: # ser.inWaiting() > 0:
             result = ser.read(1)
             RX = ord(result)
             # print ("RX=" + str(RX))
