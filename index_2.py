@@ -405,6 +405,8 @@ if __name__ == '__main__':
         cut_hsv2 = hsv[2 * height // 3:, 1 * width // 3:2 * width // 3]
         cut_hsv3 = hsv[2 * height // 3:, 2 * width // 3:]
 
+        canvas = np.zeros(frame.shape)
+
 
         mask1 = cv2.inRange(cut_hsv1, hsv_Lower, hsv_Upper)
         mask1 = cv2.erode(mask1, None, iterations=1)
@@ -662,6 +664,11 @@ if __name__ == '__main__':
 
             cv2.imshow('Kongdols(frame) - Video',frame)
             cv2.imshow('Kongdols(mask) - Mask', mask1)
+
+            canvas[2 * height // 3:, :2 * width // 3] = mask1
+            canvas[2 * height // 3:, 1 * width // 3:2 * width // 3] = mask2
+            canvas[2 * height // 3:, 2 * width // 3:] = mask3
+            cv2.imshow('canvas(frame) - Video', canvas)
 
             # ----------------------------------------------
 
