@@ -365,7 +365,7 @@ if __name__ == '__main__':
     draw_str2(frame, (5, H_View_size - 5), 'View: %.1d x %.1d.  Space: Fast <=> Video and Mask.'
               % (W_View_size, H_View_size))
     draw_str_height(frame, (5, int(H_View_size / 2)), 'Fast operation...', 3.0)
-    cv2.imshow('Kongdols(frame) - Video', frame)
+    #cv2.imshow('Kongdols(frame) - Video', frame)
 
     cv2.setMouseCallback('Kongdols(frame) - Video', mouse_move)
     #
