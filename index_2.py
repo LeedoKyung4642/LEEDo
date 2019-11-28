@@ -409,6 +409,14 @@ if __name__ == '__main__':
         mask1 = cv2.inRange(cut_hsv1, hsv_Lower, hsv_Upper)
         mask1 = cv2.erode(mask1, None, iterations=1)
         mask1 = cv2.dilate(mask1, None, iterations=1)
+
+        mask2 = cv2.inRange(cut_hsv2, hsv_Lower, hsv_Upper)
+        mask2 = cv2.erode(mask2, None, iterations=1)
+        mask2 = cv2.dilate(mask2, None, iterations=1)
+
+        mask3 = cv2.inRange(cut_hsv3, hsv_Lower, hsv_Upper)
+        mask3 = cv2.erode(mask3, None, iterations=1)
+        mask3 = cv2.dilate(mask3, None, iterations=1)
         # mask = cv2.GaussianBlur(mask, (3, 3), 2)  # softly
 
         cnts1 = cv2.findContours(mask1.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
