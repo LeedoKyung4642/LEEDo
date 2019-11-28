@@ -407,27 +407,29 @@ if __name__ == '__main__':
         cut_hsv3 = hsv[2 * height // 3:, 2 * width // 3:]
 
 
-        mask = cv2.inRange(cut_hsv1, hsv_Lower, hsv_Upper)
-        mask = cv2.erode(mask, None, iterations=1)
-        mask = cv2.dilate(mask, None, iterations=1)
+        mask1 = cv2.inRange(cut_hsv1, hsv_Lower, hsv_Upper)
+        mask1 = cv2.erode(mask1, None, iterations=1)
+        mask1 = cv2.dilate(mask1, None, iterations=1)
         # mask = cv2.GaussianBlur(mask, (3, 3), 2)  # softly
 
-        cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
+        cnts1 = cv2.findContours(mask1.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
+        cnts2 = cv2.findContours(mask2.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
+        cnts3 = cv2.findContours(mask3.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
         center = None
 
-        if len(cnts) > 0:
-            c = max(cnts, key=cv2.contourArea)
+        if len(cnts1) > 0:
+            c = max(cnts1, key=cv2.contourArea)
             ((X, Y), radius) = cv2.minEnclosingCircle(c)
-            cv2.circle(cut_frame, (int(X), int(Y)), int(radius), (0, 0, 255), 2)
+            cv2.circle(cut_frame1, (int(X), int(Y)), int(radius), (0, 0, 255), 2)
             Area = cv2.contourArea(c) / min_area[now_color]
             if Area > 255:
                 Area = 255
 
             if Area > min_area[now_color]:
                 x4, y4, w4, h4 = cv2.boundingRect(c)
-                cv2.rectangle(cut_frame, (x4, y4), (x4 + w4, y4 + h4), (0, 255, 0), 2)
+                cv2.rectangle(cut_frame1, (x4, y4), (x4 + w4, y4 + h4), (0, 255, 0), 2)
                 # ----------------------------------------
-                rows, cols = cut_frame.shape[:2]
+                rows, cols = cut_frame1.shape[:2]
                 [vx, vy, x, y] = cv2.fitLine(c, cv2.DIST_L2, 0, 0.01, 0.01)
                 # print("rows = " + str(rows) + ", cols= " + str(cols) + ", vx= " + str(vx) + ", vy= " + str(vy) + ", x=" + str(x) + ", y= " + str(y))
 
@@ -435,7 +437,7 @@ if __name__ == '__main__':
                 righty = int(((cols - x) * vy / vx) + y)
 
                 try:
-                    cv2.line(cut_frame, (cols - 1, righty), (0, lefty), (0, 0, 255), 2)
+                    cv2.line(cut_frame1, (cols - 1, righty), (0, lefty), (0, 0, 255), 2)
                 except:
                     print("cv2.line error~ " + str(righty) + ", " + str(lefty))
                     pass
@@ -472,7 +474,120 @@ if __name__ == '__main__':
                         TX_data(serial_port, 26)
                     cv2.waitKey(10)
                     break
-                
+        elif len(cnts2) > 0:
+            c = max(cnts2, key=cv2.contourArea)
+            ((X, Y), radius) = cv2.minEnclosingCircle(c)
+            cv2.circle(cut_frame2, (int(X), int(Y)), int(radius), (0, 0, 255), 2)
+            Area = cv2.contourArea(c) / min_area[now_color]
+            if Area > 255:
+                Area = 255
+
+            if Area > min_area[now_color]:
+                x4, y4, w4, h4 = cv2.boundingRect(c)
+                cv2.rectangle(cut_frame2, (x4, y4), (x4 + w4, y4 + h4), (0, 255, 0), 2)
+                # ----------------------------------------
+                rows, cols = cut_frame2.shape[:2]
+                [vx, vy, x, y] = cv2.fitLine(c, cv2.DIST_L2, 0, 0.01, 0.01)
+                # print("rows = " + str(rows) + ", cols= " + str(cols) + ", vx= " + str(vx) + ", vy= " + str(vy) + ", x=" + str(x) + ", y= " + str(y))
+
+                lefty = int((-x * vy / vx) + y)
+                righty = int(((cols - x) * vy / vx) + y)
+
+                try:
+                    cv2.line(cut_frame2, (cols - 1, righty), (0, lefty), (0, 0, 255), 2)
+                except:
+                    print("cv2.line error~ " + str(righty) + ", " + str(lefty))
+                    pass
+                point1 = (cols - 1, righty)
+                point2 = (0, lefty)
+
+                Angle = 100 + int(GetAngleTwoPoints(point2, point1))
+
+                # ----------DO---------------------------------
+                print(Angle)
+                # ----------------------------------------
+
+                X_Size = int((255.0 / W_View_size) * w4)
+                Y_Size = int((255.0 / H_View_size) * h4)
+                X_255_point = int((255.0 / W_View_size) * X)
+                Y_255_point = int((255.0 / H_View_size) * Y)
+
+                if mask.any():
+                    if Angle < 85:
+                        TX_data(serial_port, 6)
+                        cv2.waitKey(10)
+
+                    elif Angle > 115:
+                        TX_data(serial_port, 4)
+                        cv2.waitKey(10)
+                    else:
+                        TX_data(serial_port, 5)
+                        cv2.waitKey(10)
+                else:
+                    TX_data(serial_port, 26)
+                    TX_data(serial_port, 13)
+                    TX_data(serial_port, 13)
+                    if mask.any():
+                        TX_data(serial_port, 26)
+                    cv2.waitKey(10)
+                    break
+        elif len(cnts3) > 0:
+            c = max(cnts3, key=cv2.contourArea)
+            ((X, Y), radius) = cv2.minEnclosingCircle(c)
+            cv2.circle(cut_frame3, (int(X), int(Y)), int(radius), (0, 0, 255), 2)
+            Area = cv2.contourArea(c) / min_area[now_color]
+            if Area > 255:
+                Area = 255
+
+            if Area > min_area[now_color]:
+                x4, y4, w4, h4 = cv2.boundingRect(c)
+                cv2.rectangle(cut_frame3, (x4, y4), (x4 + w4, y4 + h4), (0, 255, 0), 2)
+                # ----------------------------------------
+                rows, cols = cut_frame3.shape[:2]
+                [vx, vy, x, y] = cv2.fitLine(c, cv2.DIST_L2, 0, 0.01, 0.01)
+                # print("rows = " + str(rows) + ", cols= " + str(cols) + ", vx= " + str(vx) + ", vy= " + str(vy) + ", x=" + str(x) + ", y= " + str(y))
+
+                lefty = int((-x * vy / vx) + y)
+                righty = int(((cols - x) * vy / vx) + y)
+
+                try:
+                    cv2.line(cut_frame3, (cols - 1, righty), (0, lefty), (0, 0, 255), 2)
+                except:
+                    print("cv2.line error~ " + str(righty) + ", " + str(lefty))
+                    pass
+                point1 = (cols - 1, righty)
+                point2 = (0, lefty)
+
+                Angle = 100 + int(GetAngleTwoPoints(point2, point1))
+
+                # ----------DO---------------------------------
+                print(Angle)
+                # ----------------------------------------
+
+                X_Size = int((255.0 / W_View_size) * w4)
+                Y_Size = int((255.0 / H_View_size) * h4)
+                X_255_point = int((255.0 / W_View_size) * X)
+                Y_255_point = int((255.0 / H_View_size) * Y)
+
+                if mask.any():
+                    if Angle < 85:
+                        TX_data(serial_port, 6)
+                        cv2.waitKey(10)
+
+                    elif Angle > 115:
+                        TX_data(serial_port, 4)
+                        cv2.waitKey(10)
+                    else:
+                        TX_data(serial_port, 5)
+                        cv2.waitKey(10)
+                else:
+                    TX_data(serial_port, 26)
+                    TX_data(serial_port, 13)
+                    TX_data(serial_port, 13)
+                    if mask.any():
+                        TX_data(serial_port, 26)
+                    cv2.waitKey(10)
+                    break
         else:
 
             x = 0
