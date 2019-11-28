@@ -661,8 +661,8 @@ if __name__ == '__main__':
                 draw_str2(frame, (mx2 - x_p, my2 - 30), '%.1d' % (pixel[1]))
                 draw_str2(frame, (mx2 - x_p, my2 - 15), '%.1d' % (pixel[2]))
 
-            cv2.imshow('Kongdols(frame) - Video',frame)
-            cv2.imshow('Kongdols(mask) - Mask', mask)
+            cv2.imshow('Kongdols(frame) - Video',frame1)
+            cv2.imshow('Kongdols(mask) - Mask', mask1)
 
             # ----------------------------------------------
 
