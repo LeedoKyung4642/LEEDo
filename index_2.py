@@ -395,8 +395,7 @@ if __name__ == '__main__':
         if not grabbed:
             break
 
-        height = frame.shape[0]
-
+        height, width = frame.shape[:2]
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2YUV)
 
         cut_frame1 = frame[2*height//3:,:2*width//3]
