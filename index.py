@@ -450,13 +450,13 @@ if __name__ == '__main__':
 
                 if mask.any():
                     if Angle < 80:
-                        TX_data(serial_port, 1)
+                        TX_data(serial_port, 2)
                     elif Angle > 110:
-                        TX_data(serial_port, 3)
+                        TX_data(serial_port, 4)
                     else:
-                        TX_data(serial_port, 8)
+                        TX_data(serial_port, 6)
                 else:
-                    TX_data(serial_port,6)
+                    TX_data(serial_port,26)
                     break
                 
         else:
