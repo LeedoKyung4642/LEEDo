@@ -462,7 +462,7 @@ if __name__ == '__main__':
                 X_255_point = int((255.0 / W_View_size) * X)
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
-                if mask.any():
+                if mask2.any():
                     if Angle < 85:
                         TX_data(serial_port, 6)
                         cv2.waitKey(10)
@@ -477,7 +477,7 @@ if __name__ == '__main__':
                     TX_data(serial_port,26)
                     TX_data(serial_port,13)
                     TX_data(serial_port,13)
-                    if mask.any():
+                    if mask2.any():
                         TX_data(serial_port, 26)
                     cv2.waitKey(10)
                     break
@@ -519,7 +519,7 @@ if __name__ == '__main__':
                 X_255_point = int((255.0 / W_View_size) * X)
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
-                if mask.any():
+                if mask2.any():
                     if Angle < 85:
                         TX_data(serial_port, 6)
                         cv2.waitKey(10)
@@ -534,7 +534,7 @@ if __name__ == '__main__':
                     TX_data(serial_port, 26)
                     TX_data(serial_port, 13)
                     TX_data(serial_port, 13)
-                    if mask.any():
+                    if mask2.any():
                         TX_data(serial_port, 26)
                     cv2.waitKey(10)
                     break
@@ -576,7 +576,7 @@ if __name__ == '__main__':
                 X_255_point = int((255.0 / W_View_size) * X)
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
-                if mask.any():
+                if mask2.any():
                     if Angle < 85:
                         TX_data(serial_port, 6)
                         cv2.waitKey(10)
@@ -591,7 +591,7 @@ if __name__ == '__main__':
                     TX_data(serial_port, 26)
                     TX_data(serial_port, 13)
                     TX_data(serial_port, 13)
-                    if mask.any():
+                    if mask2.any():
                         TX_data(serial_port, 26)
                     cv2.waitKey(10)
                     break
