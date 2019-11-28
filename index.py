@@ -32,13 +32,13 @@ hsv_Upper1 = 0
 # -----------  0:노란색, 1:빨강색, 3:파란색
 color_num = [0, 1, 2, 3, 4]
 
-h_max = [107, 65, 196, 111, 110]
-h_min = [77, 0, 158, 59, 74]
+h_max = [210, 65, 196, 111, 110]
+h_min = [180, 0, 158, 59, 74]
 
 s_max = [164, 200, 223, 110, 255]
 s_min = [139, 140, 150, 51, 133]
 
-v_max = [82, 151, 239, 156, 255]
+v_max = [92, 151, 239, 156, 255]
 v_min = [63, 95, 104, 61, 104]
 
 min_area = [50, 50, 50, 10, 10]
@@ -455,7 +455,7 @@ if __name__ == '__main__':
                     elif Angle > 115:
                         TX_data(serial_port, 27)
                     else:
-                        TX_data(serial_port, 9)
+                        TX_data(serial_port, 2)
                 else:
                     TX_data(serial_port,26)
                     break
