@@ -449,11 +449,11 @@ if __name__ == '__main__':
 
                 if mask.any():
                     if Angle < 85:
-                        TX_data(serial_port, 4)
+                        TX_data(serial_port, 6)
                         cv2.waitKey(10)
 
                     elif Angle > 115:
-                        TX_data(serial_port, 6)
+                        TX_data(serial_port, 4)
                         cv2.waitKey(10)
                     else:
                         TX_data(serial_port, 8)
