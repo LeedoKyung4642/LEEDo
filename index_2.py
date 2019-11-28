@@ -405,7 +405,7 @@ if __name__ == '__main__':
         cut_hsv2 = hsv[2 * height // 3:, 1 * width // 3:2 * width // 3]
         cut_hsv3 = hsv[2 * height // 3:, 2 * width // 3:]
 
-        canvas = np.zeros(frame.shape)
+        canvas = np.zeros(frame.shape[:2])
 
 
         mask1 = cv2.inRange(cut_hsv1, hsv_Lower, hsv_Upper)
