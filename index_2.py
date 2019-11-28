@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 import platform
@@ -60,7 +61,7 @@ def nothing(x):
     pass
 
 
-# 트랙바를 조정할 때 마다 실행되는 콜백 함수를 정의해야 합니다.
+# 트랙바를 조정할 때 마다 실행되는 콜백 함수를 정의해야 합니다. 
 # 포스팅의 예제에선 트랙바를 조절할 때마다 따로 실행할 명령이 없기 때문에
 # 아무일도 하지 않는 더미 함수를 만듭니다.
 
@@ -309,7 +310,7 @@ if __name__ == '__main__':
     H_View_size = int(W_View_size / 1.333)
 
     BPS = 4800  # 4800,9600,14400, 19200,28800, 57600, 115200
-    serial_use = 1  ###### <+=========== ************* ADFADSFASFSD
+    serial_use = 1 ###### <+=========== ************* ADFADSFASFSD
     now_color = 0
     View_select = 1
     # -------------------------------------
@@ -355,8 +356,8 @@ if __name__ == '__main__':
     # ---------------------------
 
     if serial_use != 0:
-        serial_port = serial.Serial('/dev/ttyAMA0', BPS, timeout=0.001)
-        serial_port.flush()  # serial cls
+       serial_port = serial.Serial('/dev/ttyAMA0', BPS, timeout=0.001)
+       serial_port.flush() # serial cls
 
     # ---------------------------
     (grabbed, frame) = camera.read()
@@ -371,24 +372,24 @@ if __name__ == '__main__':
     # ---------------------------
 
     if serial_use != 0:
-        t = Thread(target=receiving, args=(serial_port,))
-        time.sleep(0.1)
-        t.start()
+       t = Thread(target=receiving, args=(serial_port,))
+       time.sleep(0.1)
+       t.start()
     #
     # First -> Start Code Send
-    # TX_data(serial_port, 1)
-    # TX_data(serial_port, 1)
-    # TX_data(serial_port, 1)
+    #TX_data(serial_port, 1)
+    #TX_data(serial_port, 1)
+    #TX_data(serial_port, 1)
 
     old_time = clock()
 
     # -------- Main Loop Start --------
     while True:
-        key = cv2.waitKey(1)  # key==ord("a")
-        if key == 27:
+        key=cv2.waitKey(1)  #key==ord("a")
+        if key==27:
             break
 
-        # grab the current frame
+         #grab the current frame
         (grabbed, frame) = camera.read()
 
         if not grabbed:
@@ -398,10 +399,15 @@ if __name__ == '__main__':
 
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2YUV)
 
-        cut_frame = frame[2 * height // 3:, :]
-        cut_hsv = hsv[2 * height // 3:, :]  # HSV => YUV
+        cut_frame1 = frame[2*height//3:,:2*width//3]
+        cut_frame2 = frame[2 * height // 3:, 1 * width // 3:2 * width // 3]
+        cut_frame3 = frame[2 * height // 3:, 2 * width // 3:]
+        cut_hsv1 = hsv[2*height//3:,:2*width//3]   # HSV => YUV
+        cut_hsv2 = hsv[2 * height // 3:, 1 * width // 3:2 * width // 3]
+        cut_hsv3 = hsv[2 * height // 3:, 2 * width // 3:]
 
-        mask = cv2.inRange(cut_hsv, hsv_Lower, hsv_Upper)
+
+        mask = cv2.inRange(cut_hsv1, hsv_Lower, hsv_Upper)
         mask = cv2.erode(mask, None, iterations=1)
         mask = cv2.dilate(mask, None, iterations=1)
         # mask = cv2.GaussianBlur(mask, (3, 3), 2)  # softly
@@ -438,7 +444,7 @@ if __name__ == '__main__':
 
                 Angle = 100 + int(GetAngleTwoPoints(point2, point1))
 
-                # ----------DO---------------------------------
+                #----------DO---------------------------------
                 print(Angle)
                 # ----------------------------------------
 
@@ -459,14 +465,14 @@ if __name__ == '__main__':
                         TX_data(serial_port, 5)
                         cv2.waitKey(10)
                 else:
-                    TX_data(serial_port, 26)
-                    TX_data(serial_port, 13)
-                    TX_data(serial_port, 13)
+                    TX_data(serial_port,26)
+                    TX_data(serial_port,13)
+                    TX_data(serial_port,13)
                     if mask.any():
                         TX_data(serial_port, 26)
                     cv2.waitKey(10)
                     break
-
+                
         else:
 
             x = 0
@@ -478,15 +484,16 @@ if __name__ == '__main__':
             Area = 0
             Angle = 0
 
-        # --------------------------------------
+
+        #--------------------------------------
 
         Read_RX = RX_data(serial_port)
         if Read_RX != 0:
             print("Read_RX = " + str(Read_RX))
 
-        # TX_data(serial_port,255)
+        #TX_data(serial_port,255)
 
-        # --------------------------------------
+        #--------------------------------------    
 
         Frame_time = (clock() - old_time) * 1000.
         old_time = clock()
@@ -511,7 +518,7 @@ if __name__ == '__main__':
             set_V = pixel[2]
             pixel2 = frame[my2, mx2]
 
-            # frame[2*height//3:,:] = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
+            #frame[2*height//3:,:] = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
 
             if my2 < (H_View_size / 2):
                 if mx2 < 50:
@@ -532,7 +539,7 @@ if __name__ == '__main__':
                 draw_str2(frame, (mx2 - x_p, my2 - 30), '%.1d' % (pixel[1]))
                 draw_str2(frame, (mx2 - x_p, my2 - 15), '%.1d' % (pixel[2]))
 
-            cv2.imshow('Kongdols(frame) - Video', frame)
+            cv2.imshow('Kongdols(frame) - Video',frame)
             cv2.imshow('Kongdols(mask) - Mask', mask)
 
             # ----------------------------------------------
@@ -550,6 +557,6 @@ if __name__ == '__main__':
     cv2.destroyAllWindows()
     # cleanup the camera and close any open windows
     if serial_use != 0:
-        serial_port.close()
-        camera.release()
-        cv2.destroyAllWindows()
+       serial_port.close()
+       camera.release()
+       cv2.destroyAllWindows()
