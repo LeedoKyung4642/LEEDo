@@ -449,13 +449,13 @@ if __name__ == '__main__':
                 Y_255_point = int((255.0 / H_View_size) * Y)
 
                 if mask.any():
-                    if Angle < 80:
-                        TX_data(serial_port, 4)
+                    if Angle < 85:
+                        TX_data(serial_port, 28)
 
-                    elif Angle > 110:
-                        TX_data(serial_port, 6)
+                    elif Angle > 115:
+                        TX_data(serial_port, 27)
                     else:
-                        TX_data(serial_port, 2)
+                        TX_data(serial_port, 8)
                 else:
                     TX_data(serial_port,26)
                     break
