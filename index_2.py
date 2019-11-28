@@ -639,7 +639,6 @@ if __name__ == '__main__':
             set_S = pixel[1]
             set_V = pixel[2]
             pixel2 = frame[my2, mx2]
-
             #frame[2*height//3:,:] = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
 
             if my2 < (H_View_size / 2):
