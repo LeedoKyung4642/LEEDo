@@ -51,9 +51,10 @@ Temp_count = 0
 Read_RX = 0
 
 mx, my = 0, 0
-winname='Kongdols(frame)-video'
+
 threading_Time = 5 / 1000.
 
+winname = 'Kongdols --video'
 
 # -----------------------------------------------
 
@@ -365,7 +366,7 @@ if __name__ == '__main__':
     draw_str2(frame, (5, H_View_size - 5), 'View: %.1d x %.1d.  Space: Fast <=> Video and Mask.'
               % (W_View_size, H_View_size))
     draw_str_height(frame, (5, int(H_View_size / 2)), 'Fast operation...', 3.0)
-    #cv2.imshow('Kongdols(frame) - Video', frame)
+    cv2.imshow(winname, frame)
 
     cv2.setMouseCallback(winname, mouse_move)
     #
@@ -668,7 +669,6 @@ if __name__ == '__main__':
             canvas[2 * height // 3:, 1 * width // 3:2 * width // 3] = mask2
             canvas[2 * height // 3:, 2 * width // 3:] = mask3
             cv2.imshow('canvas(frame) - Video', canvas)
-
 
             # ----------------------------------------------
 
