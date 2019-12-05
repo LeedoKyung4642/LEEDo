@@ -51,7 +51,7 @@ Temp_count = 0
 Read_RX = 0
 
 mx, my = 0, 0
-
+winname='Kongdols(frame)-video'
 threading_Time = 5 / 1000.
 
 
@@ -367,7 +367,7 @@ if __name__ == '__main__':
     draw_str_height(frame, (5, int(H_View_size / 2)), 'Fast operation...', 3.0)
     #cv2.imshow('Kongdols(frame) - Video', frame)
 
-    cv2.setMouseCallback('Kongdols(frame) - Video', mouse_move)
+    cv2.setMouseCallback(winname, mouse_move)
     #
     # ---------------------------
 
@@ -662,12 +662,13 @@ if __name__ == '__main__':
                 draw_str2(frame, (mx2 - x_p, my2 - 30), '%.1d' % (pixel[1]))
                 draw_str2(frame, (mx2 - x_p, my2 - 15), '%.1d' % (pixel[2]))
 
-            cv2.imshow('1(frame) - Video',frame)
+            cv2.imshow(winname,frame)
 
             canvas[2 * height // 3:, :2 * width // 3] = mask1
             canvas[2 * height // 3:, 1 * width // 3:2 * width // 3] = mask2
             canvas[2 * height // 3:, 2 * width // 3:] = mask3
             cv2.imshow('canvas(frame) - Video', canvas)
+
 
             # ----------------------------------------------
 
