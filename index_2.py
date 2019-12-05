@@ -467,21 +467,21 @@ if __name__ == '__main__':
                 if mask2.any():
                     if Angle < 85:
                         TX_data(serial_port, 6)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
 
                     elif Angle > 115:
                         TX_data(serial_port, 4)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
                     else:
                         TX_data(serial_port, 5)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
                 else:
                     TX_data(serial_port,26)
                     TX_data(serial_port,13)
                     TX_data(serial_port,13)
                     if mask2.any():
                         TX_data(serial_port, 26)
-                    cv2.waitKey(10)
+                    cv2.waitKey(1)
                     break
         elif len(cnts2) > 0:
             c = max(cnts2, key=cv2.contourArea)
@@ -524,21 +524,21 @@ if __name__ == '__main__':
                 if mask2.any():
                     if Angle < 85:
                         TX_data(serial_port, 6)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
 
                     elif Angle > 115:
                         TX_data(serial_port, 4)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
                     else:
                         TX_data(serial_port, 5)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
                 else:
                     TX_data(serial_port, 26)
                     TX_data(serial_port, 13)
                     TX_data(serial_port, 13)
                     if mask2.any():
                         TX_data(serial_port, 26)
-                    cv2.waitKey(10)
+                    cv2.waitKey(1)
                     break
         elif len(cnts3) > 0:
             c = max(cnts3, key=cv2.contourArea)
@@ -581,21 +581,21 @@ if __name__ == '__main__':
                 if mask2.any():
                     if Angle < 85:
                         TX_data(serial_port, 6)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
 
                     elif Angle > 115:
                         TX_data(serial_port, 4)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
                     else:
                         TX_data(serial_port, 5)
-                        cv2.waitKey(10)
+                        cv2.waitKey(1)
                 else:
                     TX_data(serial_port, 26)
                     TX_data(serial_port, 13)
                     TX_data(serial_port, 13)
                     if mask2.any():
                         TX_data(serial_port, 26)
-                    cv2.waitKey(10)
+                    cv2.waitKey(1)
                     break
         else:
 
